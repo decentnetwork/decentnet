@@ -1,0 +1,62 @@
+[package]
+name = "decentnet"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "skynet"
+path = "bin/main.rs"
+
+[[bin]]
+name = "update-bindings"
+path = "update.rs"
+
+[lib]
+name = "decentnet"
+crate-type = ["cdylib", "lib"]
+
+[build-dependencies]
+prost-build = "0.10.0"
+ffi-gen = { version = "0.1.13" }
+
+[dependencies]
+async-trait = "0.1.52"
+tokio = {version = "1.17.0", features = ["io-util", "io-std", "macros", "rt", "rt-multi-thread", "sync", "fs", "time"]}
+serde = {version = "1.0.136", features = ["derive"]}
+serde_json = "1.0.79"
+lazy_static = "1.4.0"
+log = "0.4.16"
+pretty_env_logger = "0.4.0"
+clap = "3.1.6"
+rkyv = "0.7.36"
+void = "1.0.2"
+either = "1.6.1"
+log4rs = "1.0.0"
+prost = "0.10.0"
+tokio-tungstenite = "0.17.1"
+tungstenite = "0.17.2"
+ffi-gen-macro = { version = "0.1.2" }
+futures-lite = "1.12.0"
+ping = "0.4.0"
+
+[dependencies.libp2p]
+git = "https://github.com/decentnetwork/rust-libp2p.git"
+branch = "dnet"
+default-features = false
+features = ["decentnet", "yamux"]
+
+[dev-dependencies]
+tokio-test = "0.4.2"
+
+[profile.beta]
+inherits = "release"
+opt-level = "s"
+strip = true
+lto = true
+
+[profile.stable]
+inherits = "release"
+opt-level = "z"
+strip = true
+lto = true
+panic = "abort"

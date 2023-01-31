@@ -1,0 +1,4 @@
+
+[submodule "protobuf"]
+	path = protobuf
+	url = https://github.com/decentnetwork/decentnet-protobuf.git
