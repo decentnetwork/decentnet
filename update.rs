@@ -10,10 +10,7 @@ fn main() {
         if dllfile.exists() {
             std::fs::remove_file(&dllfile).unwrap();
         }
-        let dir_var = match std::option_env!("CARGO_TARGET_DIR") {
-            Some(dir) => dir,
-            None => "target",
-        };
+        let dir_var = std::option_env!("CARGO_TARGET_DIR").unwrap_or("target");
         let project_path = PathBuf::from(&dir_var);
         let build_path = project_path.join("release/decentnet.dll");
         if build_path.exists() {

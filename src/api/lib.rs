@@ -46,8 +46,7 @@ pub fn initialise_with_private_key(
 ) -> Result<Swarm<DecentNetworkBehaviour>, &'static str> {
     let network = {
         let bytes: Vec<u8> = private_key.as_ref().to_vec();
-        let network = Network::from_bytes(bytes);
-        network
+        Network::from_bytes(bytes)
     };
     initialise_with_network(network_config, network)
 }
@@ -85,7 +84,6 @@ pub fn ping(network: &mut DecentNetworkBehaviour, network_id: &str) {
 
 pub fn external_addresses(swarm: &mut Swarm<DecentNetworkBehaviour>) -> Vec<String> {
     DecentNetworkBehaviour::external_addresses(swarm)
-        .into_iter()
         .map(|a| a.addr.to_string())
         .collect()
 }
@@ -108,7 +106,6 @@ pub fn bootnodes(swarm: &mut Swarm<DecentNetworkBehaviour>) -> Vec<String> {
 pub fn listeners(swarm: &mut Swarm<DecentNetworkBehaviour>) -> Vec<String> {
     swarm
         .listeners()
-        .into_iter()
         .map(|listener| listener.to_string())
         .collect()
 }

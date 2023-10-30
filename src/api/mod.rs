@@ -61,7 +61,6 @@ impl DecentNetworkBehaviour {
             .clone()
             .into_iter()
             .map(|bootnode| bootnode.network_id)
-            .into_iter()
             .for_each(|network_id| {
                 Self::get_nodes(swarm, &network_id);
             });

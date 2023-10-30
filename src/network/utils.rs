@@ -5,7 +5,6 @@ use libp2p::Multiaddr;
 pub fn get_external_addrs(addr: &[Multiaddr]) -> Vec<Multiaddr> {
     addr.iter()
         .filter_map(|addr| {
-            let addr = &*addr;
             if is_public_ip(addr) {
                 Some((*addr).clone())
             } else {
@@ -33,7 +32,7 @@ pub fn is_public_ip(addr: &Multiaddr) -> bool {
             && !ip.is_broadcast()
             && !ip.is_documentation()
             && !is_shared
-    } else if addr_str.starts_with("/ip4/") {
+    } else if addr_str.starts_with("/ip6/") {
         //TODO? Handle ipv6 cases
         let addr_str = addr_str.replace("/ip6/", "");
         let addr_str = addr_str.split('/').collect::<Vec<_>>()[0];
